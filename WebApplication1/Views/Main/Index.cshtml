@@ -1,0 +1,82 @@
+﻿@model WebApplication1.Models.FormModel
+
+@{
+    ViewBag.Title = "Image test";
+}
+<div id="form" class="col-xs-6">
+    @using (Html.BeginForm("Index", "Main", FormMethod.Post, new { @class = "form-horizontal", id = "feilds_form" }))
+    {
+        foreach (var f in Model.Fields)
+        {
+            <div class="form-group row">
+                @Html.Label(f.Name, new { @class = "col-xs-4 control-label", @for = $"field_{f.Id}" })
+                <div class="col-xs-4">
+                    @Html.TextBox($"field_{f.Id}", f.Data, new { @class = "form-control", pattern = string.IsNullOrEmpty(f.ValidationString) ? ".*" : f.ValidationString })
+                </div>
+                <div class="col-xs-4">
+                    <img src="@($"data:image/png;base64,{Convert.ToBase64String(f.PictureBytes)}")" />
+                </div>
+            </div>
+        }
+    }
+    <span id="result"></span>
+</div>
+
+<div id="image" class="col-xs-6">
+    <img src="/Content/1.jpeg" alt="Nakladnaya" />
+    @*<img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.imageBytes))" />*@
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var fields = @Html.Raw(Json.Encode(Model.Fields));
+    $(document).ready(function () {
+        resSelector.hide();
+        $("#image, #form").height($(window).height() - 10);
+
+        $("input").focus(function () {
+            resSelector.hide();
+            var id = $(this).attr("id").split("_")[1];
+            var field = findFieldById(id, fields);
+            $("#image img").css("top", field.Y).css("left", field.X);
+        });
+
+        $('input').keypress(function (e) {
+            resSelector.hide();
+            var id = $(this).attr("id").split("_")[1];
+            var code = e.keyCode;
+            if (code === 13) // Enter
+            {
+                if ($(this).is(":valid")) {
+                    SaveData($(this).val(), id);
+                }
+            }
+            if (code === 10) // ctrl+Enter
+            {
+                SaveData($(this).val(), id);
+            }
+        });
+    });
+    var resSelector = $("span#result");
+    function SaveData(value, id) {
+        $.ajax({
+            url: "/Main/PostData",
+            method:"post",
+            dataType: "json",
+            data: $.param({value: value, id: id}),
+            context: resSelector
+        }).done(function (res) {
+            resSelector.show();
+            $(this).text("Rows affected: " + JSON.parse(res));
+        });
+    }
+
+    function findFieldById(id) {
+        var i, lenght = fields.length;
+
+        for (i = 0; i < lenght; i++) {
+            if (fields[i].Id == id)
+                return fields[i];
+        }
+        return null;
+    }
+</script>

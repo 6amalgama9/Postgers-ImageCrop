@@ -1,0 +1,37 @@
+﻿#form, #image {
+    overflow-y: scroll;
+    min-height: 700px;
+    min-width: 300px;
+}
+
+#image {
+    position: relative;
+}
+
+#image img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+#form img {
+    max-width: 100%;
+    max-height: 50px;
+}
+
+.container2 {
+    margin: 5px 15px;
+}
+
+.form-control {
+    height: 44px;
+}
+input:invalid {
+    border: 1px solid red !important;
+}
+
+input:valid {
+    border: 1px solid green !important;
+}
