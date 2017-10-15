@@ -37,20 +37,24 @@
             resSelector.hide();
             var id = $(this).attr("id").split("_")[1];
             var field = findFieldById(id, fields);
-           // $("#image img").css("top", field.Y).css("left", field.X);
-            var h = $("#image").height();
-            var w = $("#image").width();
-            var left = w / 2 - field.X1;
-            var top = h / 2 - field.Y1;
-            $( "#image img" ).animate({
-                left: left,
-                top: top
+
+            var wBlock = field.X2 - field.X1;
+            var hBlock = field.Y2 - field.Y1;
+
+            var left = $("#image").width() / 2 - wBlock / 2;
+            var top = $("#image").height() / 2 - hBlock / 2;
+
+            $("#image img" ).animate({
+                left: left - field.X1,
+                top: top - field.Y1
             });
-            var left2 = w / 2 - (field.X2 - field.X1)/2;
-            var top2 = h / 2 - (field.Y2 - field.Y1)/ 2;
-            console.log(w + " " + h);
-            console.log(left2 + " " + top2);
-            $(".rectangle").css("top", top2 ).css("left", left2);
+
+            $(".rectangle").show().animate({
+                width: wBlock,
+                height: hBlock,
+                top: top,
+                left: left
+            });
         });
 
         $('input').keypress(function (e) {

@@ -27,11 +27,10 @@ namespace WebApplication1.Models
     }
 
     [Table("xgb_softline.field")]
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class Field : FieldBase
     { }
 
-    public class FieldModel : FieldBase
+    public class FieldModel : FieldBase // can not inherit from Field class
     {
         public string PicUrl { get; set; }
         public byte[] PictureBytes { get; set; }
@@ -55,7 +54,6 @@ namespace WebApplication1.Models
     }
 
     [Table("xgb_softline.picture")]
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class Picture
     {
         public int Id { get; set; }

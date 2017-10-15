@@ -44,4 +44,5 @@ input:valid {
     background-color: green;
     top: 90px;
     left: 50px;
+    display: none;
 }
