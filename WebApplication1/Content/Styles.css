@@ -35,3 +35,13 @@ input:invalid {
 input:valid {
     border: 1px solid green !important;
 }
+
+.rectangle {
+    opacity: 0.4;
+    position: absolute;
+    width: 150px;
+    height: 20px;
+    background-color: green;
+    top: 90px;
+    left: 50px;
+}

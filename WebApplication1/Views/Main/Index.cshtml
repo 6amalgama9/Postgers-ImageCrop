@@ -24,7 +24,7 @@
 
 <div id="image" class="col-xs-6">
     <img src="/Content/1.jpeg" alt="Nakladnaya" />
-    @*<img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.imageBytes))" />*@
+    <div class="rectangle"></div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -37,7 +37,20 @@
             resSelector.hide();
             var id = $(this).attr("id").split("_")[1];
             var field = findFieldById(id, fields);
-            $("#image img").css("top", field.Y).css("left", field.X);
+           // $("#image img").css("top", field.Y).css("left", field.X);
+            var h = $("#image").height();
+            var w = $("#image").width();
+            var left = w / 2 - field.X1;
+            var top = h / 2 - field.Y1;
+            $( "#image img" ).animate({
+                left: left,
+                top: top
+            });
+            var left2 = w / 2 - (field.X2 - field.X1)/2;
+            var top2 = h / 2 - (field.Y2 - field.Y1)/ 2;
+            console.log(w + " " + h);
+            console.log(left2 + " " + top2);
+            $(".rectangle").css("top", top2 ).css("left", left2);
         });
 
         $('input').keypress(function (e) {
