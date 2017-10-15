@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{8986F308-2DB4-4A9A-ABDB-30C9A7C7273E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftLineTest", "WebApplication1\SoftLineTest.csproj", "{8986F308-2DB4-4A9A-ABDB-30C9A7C7273E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
